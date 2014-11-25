@@ -13,7 +13,6 @@ lib-cov
 # Intellij
 .idea
 
-
 # Coverage directory used by tools like istanbul
 coverage
 
@@ -33,3 +32,4 @@ node_modules
 
 # Front End Dependency directory
 public/lib
+
