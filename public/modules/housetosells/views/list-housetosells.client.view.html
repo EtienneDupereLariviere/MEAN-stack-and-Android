@@ -1,0 +1,48 @@
+<section data-ng-controller="HousetosellsController" data-ng-init="init()">
+    <div class="page-header">
+        <h1>House to sale</h1>
+    </div>
+    <div data-ng-show="error" class="text-danger">
+        <strong data-ng-bind="error"></strong>
+    </div>
+    <div class="verticalLine">
+        <form class="form-inline" data-ng-submit="find()">
+            <div class="form-group col-md-3">
+                <label class="control-label " for="filterCategory">Category :</label>
+                <select class="form-control" data-ng-model="filterCategory" id="filterCategory" ng-options="category._id as category.categoryName for category in categories">
+                    <option value="">Select Category</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                    <label class="control-label" for="minFilterPrice">Minimum price :</label>
+                    <input type="text" data-ng-model="minFilterPrice" id="minFilterPrice" class="form-control" placeholder="Minimum price" ng-currency min="0" ng-required="true">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label" for="maxFilterPrice">Maximum price :</label>
+                <input type="text" data-ng-model="maxFilterPrice" id="maxFilterPrice" class="form-control" placeholder="Maximum price" ng-currency min="0" ng-required="true">
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label " for="city">City / Neighborhood : </label>
+                <input type="text" id="city" data-ng-model="city" class="form-control" ng-autocomplete details="details2" options="{types: '(cities)', country: 'ca'}"/>
+            </div>
+            <br><br><br><br><button type="submit" class="btn btn-default pull-right">Search house</button>
+        </form>
+        <br><br>
+    </div>
+    <pagination class="pull-right" boundary-links="true" total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" ng-show="housetosells.length" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <br><br><br>
+    <div class="media well" data-ng-repeat="housetosell in housetosells | startFrom:currentPage*pageSize | limitTo:pageSize">
+        <a class="media-left media-middle" data-ng-href="#!/housetosells/{{housetosell._id}}">
+            <img class="img-rounded" id="imagePreview" src="{{ housetosell.image }}" />
+        </a>
+        <div class="media-body">
+            <h3 class="media-heading">{{ housetosell.price | currency }}</h3>
+                <a class="text-muted" data-ng-href="#!/housetosells/{{housetosell._id}}">{{ findOneCategory(housetosell.category) }}</a>
+                <p>{{ housetosell.description }}</p>
+        </div>
+    </div>
+    <pagination class="pull-right" boundary-links="true" total-items="totalItems" ng-model="currentPage" items-per-page="pageSize" ng-show="housetosells.length" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <div class="alert alert-warning text-center" data-ng-hide="!housetosells.$resolved || housetosells.length">
+    	No house to sells with your criteria
+    </div>
+</section>

@@ -1,0 +1,68 @@
+<section data-ng-controller="HousetosellsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit House</h1>
+    </div>
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="{ scrollwheel: false, zoomControl: false, draggable: false, keyboardShortcuts: false, disableDoubleClickZoom: false }">
+        <ui-gmap-markers idkey="map.idkey" models="map.markers" coords="'self'" icon="'icon'"></ui-gmap-markers>
+    </ui-gmap-google-map>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()">
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="address">Address</label>
+                    <div class="controls">
+                        <input type="text" id="address" class="form-control" data-ng-model="housetosell.address" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="category">Category</label>
+                    <div class="controls">
+                        <select class="form-control" data-ng-model="housetosell.category" id="category" ng-options="category._id as category.categoryName for category in categories" required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="nbRoom">Number of Room</label>
+                    <div class="controls">
+                        <input type="number" data-ng-model="housetosell.nbRoom" id="nbRoom" class="form-control" placeholder="Number of Room" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="price">Price</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="housetosell.price" id="price" class="form-control " placeholder="Price" ng-currency min="1" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="characteristics">Characteristics</label>
+                    <div class="controls">
+                        <textarea class="form-control" data-ng-model="housetosell.characteristics" id="characteristics" rows="5" placeholder="Characteristics"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea class="form-control" data-ng-model="housetosell.description" id="description" rows="5" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="image">House image</label>
+                    <div class="thumbnail" ng-hide="housetosell.image.length">
+                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                    </div>
+                    <div class="thumbnail" ng-show="housetosell.image.length">
+                        <img id="imagePreview" src="{{ housetosell.image }}" />
+                    </div>
+                    <div>
+                        <input type="file" id="choose"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
