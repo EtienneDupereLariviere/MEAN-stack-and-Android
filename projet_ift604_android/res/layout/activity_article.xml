@@ -21,18 +21,10 @@
          android:layout_height="wrap_content"
          android:text="[TitreActivity]"
          android:textSize="30sp" />
-
-     <shape>
-        <gradient
-            android:angle="90"
-            android:startColor="#FFFF0000"
-            android:endColor="#FF00FF00"
-            android:type="linear" />
-    </shape>
     
      <TextView
         android:layout_marginTop="10dp"
-        android:id="@+id/textViewTitre"
+        android:id="@+id/textViewDateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Posted on [date] by [user]" />
