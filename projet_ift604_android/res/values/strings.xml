@@ -4,5 +4,9 @@
     <string name="app_name">Pizza chez Tony</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- Login -->
+    <string name="noUserPass">You must entered a username and a password</string>
+    <string name="notGoodUserPass">You entered a wrong username/password combo</string>
 
 </resources>

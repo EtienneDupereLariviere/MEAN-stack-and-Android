@@ -1,13 +1,14 @@
 package com.example.main;
 
 
-import com.example.projet_ift604_android.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.communications.UserTransactions;
+import com.example.projet_ift604_android.R;
 
 
 public class BaseActivity extends Activity {
@@ -27,7 +28,7 @@ public class BaseActivity extends Activity {
 		Intent intent = null;
 		switch (item.getItemId()) {
 		case R.id.menuAccueil:
-			 intent = new Intent(BaseActivity.this, MainActivity.class);
+			intent = new Intent(BaseActivity.this, MainActivity.class);
 			break;
 		case R.id.submenuListArticle:
 			intent = new Intent(BaseActivity.this, ListArticlesActivity.class);
@@ -41,9 +42,17 @@ public class BaseActivity extends Activity {
 		case R.id.submenuAddMaison:
 			intent = new Intent(BaseActivity.this, AddMaisonActivity.class);
 			break;
+		case R.id.menuLogOut:
+		    UserTransactions at = new UserTransactions(BaseActivity.this);
+		    at.signOut();
+		    intent = new Intent(BaseActivity.this, LoginActivity.class);
+		    break;
 		}
 		if(intent!=null){
-			startActivity(intent);	
+			startActivity(intent);
+			
+			if (item.getItemId() == R.id.menuLogOut)
+			    BaseActivity.this.finish();
 		}
 		
 		return super.onOptionsItemSelected(item);

@@ -8,9 +8,15 @@ public class User {
 	String email;
 	String username;
 	String password;
+	String _id;
 	
-	public User (){
-		
+	public User() {
+		super();
+	}
+	
+	public User(String username, String password) {
+	    this.username = username;
+	    this.password = password;
 	}
 	
 	public String getFirstName() {
@@ -60,5 +66,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 }
 

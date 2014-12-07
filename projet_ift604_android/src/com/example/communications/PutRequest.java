@@ -1,64 +1,63 @@
 package com.example.communications;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.example.utils.ConnectionStatus;
-import com.example.utils.Constants;
-
-import android.app.Activity;
 import android.util.Log;
 
-public class GetRequest {
-    
+import com.example.utils.Constants;
+
+public class PutRequest {
+
     private String strUrl;
     private int htmlCode;
     private String json;
-    private Activity activity;
     
-    public GetRequest(String strUrl, String json, Activity activity)
+    public PutRequest(String strUrl, String json)
     {
         this.strUrl = strUrl;
         this.htmlCode = 0;
         this.json = json;
-        this.activity = activity;
     }
     
-    public String execute() {
+    public void execute() {
         try {
             URL url = new URL(strUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
-            conn.setRequestProperty(Constants.COOKIE, ConnectionStatus.getCookie(activity));
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
      
-            this.htmlCode = conn.getResponseCode();
-            String result = "";
+            String input = "{\"title\":\"Test\",\"content\":\"Yahoo j'ai gagne\"}";
+            
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+            
+            htmlCode = conn.getResponseCode();
      
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                (conn.getInputStream())));
+                    (conn.getInputStream())));
      
-            String output;           
+            String output;          
             while ((output = br.readLine()) != null) {
-                result += output;
-                Log.i(Constants.GET_REQUEST, output);
+                Log.i(Constants.PUT_REQUEST, output);
             }
      
             conn.disconnect();
-            
-            return result;
             
         } catch (MalformedURLException e) { 
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        return json;
     }
 }

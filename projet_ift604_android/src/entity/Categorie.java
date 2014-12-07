@@ -4,9 +4,10 @@ public class Categorie {
 
 	String categorieName;
 	String categorieDesc;
+	String _id;
 	
 	public Categorie(){
-		
+		super();
 	}
 	
 	public String getCategorieName() {
@@ -24,4 +25,12 @@ public class Categorie {
 	public void setCategorieDesc(String categorieDesc) {
 		this.categorieDesc = categorieDesc;
 	}
+	
+	public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 }

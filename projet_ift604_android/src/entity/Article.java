@@ -4,20 +4,30 @@ import java.sql.Date;
 
 public class Article {
 
-	Date created;
+	String created;
 	String title;
 	String content;
 	User user;
+	String _id;
 	
-	public Article(){
-		
+	public Article() {
+		super();
 	}
 	
-	public Date getCreated() {
+	public Article(String _id, String content, String title, String created, User user)
+	{
+	    this._id = _id;
+	    this.content = content;
+	    this.title = title;
+	    this.created = created;
+	    this.user = user;
+	}
+	
+	public String getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(String created) {
 		this.created = created;
 	}
 
@@ -44,5 +54,13 @@ public class Article {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
 }

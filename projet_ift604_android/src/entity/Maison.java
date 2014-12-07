@@ -12,9 +12,10 @@ public class Maison {
 	Integer price;
 	String image;
 	User user;
+	String _id;
 	
 	public Maison(){
-		
+		super();
 	}
 	
 	public Double getLatitude() {
@@ -96,5 +97,13 @@ public class Maison {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
 }

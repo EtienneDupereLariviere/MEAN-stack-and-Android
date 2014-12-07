@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
     <item android:id="@+id/menuAccueil" android:alphabeticShortcut="a"
         android:title="Accueil" android:orderInCategory="1" />
+    
     <item android:id="@+id/menuArticles" android:alphabeticShortcut="b"
         android:title="Articles" android:orderInCategory="2">
         <menu >
-        <group android:id="@+id/groupArticle" android:checkableBehavior="single">
-            <item android:id="@+id/submenuListArticle" android:title="Liste des articles" />
-            <item android:id="@+id/submenuAddArticle" android:title="Ajouter un article" />
-        </group>   
+	        <group android:id="@+id/groupArticle" android:checkableBehavior="single">
+	            <item android:id="@+id/submenuListArticle" android:title="Liste des articles" />
+	            <item android:id="@+id/submenuAddArticle" android:title="Ajouter un article" />
+	        </group>   
         </menu>
     </item>
-        <item android:id="@+id/menuMaisons" android:alphabeticShortcut="b"
-        android:title="Real estate" android:orderInCategory="2">
-        <menu >
-        <group android:id="@+id/groupMaison" android:checkableBehavior="single">
-            <item android:id="@+id/submenuListMaison" android:title="Liste des maisons" />
-            <item android:id="@+id/submenuAddMaison" android:title="Ajouter des maisons" />
-        </group>   
-        </menu>
+    
+    <item android:id="@+id/menuMaisons" android:alphabeticShortcut="c"
+	    android:title="Real estate" android:orderInCategory="3">
+	    <menu >
+		    <group android:id="@+id/groupMaison" android:checkableBehavior="single">
+		        <item android:id="@+id/submenuListMaison" android:title="Liste des maisons" />
+		        <item android:id="@+id/submenuAddMaison" android:title="Ajouter des maisons" />
+		    </group>   
+	    </menu>
     </item>
+    
+    <item android:id="@+id/menuLogOut" android:alphabeticShortcut="d"
+        android:title="LogOut" android:orderInCategory="4" />
 </menu>
