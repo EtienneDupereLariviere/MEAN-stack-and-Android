@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.communications.UserTransactions;
+import com.example.entity.User;
 import com.example.projet_ift604_android.R;
 import com.example.utils.ConnectionStatus;
 
-import entity.User;
 
 public class LoginActivity extends Activity {
 

@@ -7,11 +7,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.communications.ArticleTransactions;
+import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
 import com.example.utils.ConnectionStatus;
 import com.example.utils.Constants;
 import com.google.gson.Gson;
-import entity.Article;
 
 public class ArticleActivity extends BaseActivity {
 	

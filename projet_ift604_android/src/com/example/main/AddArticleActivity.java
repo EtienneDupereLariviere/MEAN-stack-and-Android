@@ -10,11 +10,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.communications.ArticleTransactions;
+import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
 import com.example.utils.Constants;
 import com.google.gson.Gson;
 
-import entity.Article;
 
 public class AddArticleActivity extends BaseActivity{
 	EditText TextTitreArt;

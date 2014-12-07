@@ -9,11 +9,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.example.communications.ArticleTransactions;
+import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
 import com.example.utils.Constants;
 import com.example.utils.CustomRowAdapter;
 import com.google.gson.Gson;
-import entity.Article;
 
 public class ListArticlesActivity extends BaseActivity implements OnItemClickListener{
 	

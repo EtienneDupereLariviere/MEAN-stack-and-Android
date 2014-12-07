@@ -1,11 +1,12 @@
 package com.example.communications;
 
 import java.lang.reflect.Type;
+
+import com.example.entity.User;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import entity.User;
 
 public class UserAdapter {
 

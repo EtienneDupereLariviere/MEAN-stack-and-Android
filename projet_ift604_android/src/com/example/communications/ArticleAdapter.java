@@ -2,12 +2,12 @@ package com.example.communications;
 
 import java.lang.reflect.Type;
 
+import com.example.entity.Article;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import entity.Article;
 
 public class ArticleAdapter {
 

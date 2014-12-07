@@ -4,12 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
 import android.widget.Toast;
+
+import com.example.entity.User;
 import com.example.projet_ift604_android.R;
 import com.example.utils.ConnectionStatus;
 import com.example.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entity.User;
 
 public class UserTransactions {
     

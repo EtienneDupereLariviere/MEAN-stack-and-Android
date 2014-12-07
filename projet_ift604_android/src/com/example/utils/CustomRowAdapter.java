@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
-import entity.Article;
 
 public class CustomRowAdapter extends ArrayAdapter<Article> {
 

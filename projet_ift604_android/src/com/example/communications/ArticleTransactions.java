@@ -6,11 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+
+import com.example.entity.Article;
+import com.example.entity.User;
 import com.example.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entity.Article;
-import entity.User;
 
 public class ArticleTransactions {
 
