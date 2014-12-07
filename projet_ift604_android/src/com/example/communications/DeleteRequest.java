@@ -34,14 +34,9 @@ public class DeleteRequest {
             URL url = new URL(strUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
-            conn.setDoOutput(true);
             conn.setRequestProperty(Constants.COOKIE, ConnectionStatus.getCookie(activity));
             conn.setRequestMethod("DELETE");
             conn.setRequestProperty("Content-Type", "application/json");
-            
-            OutputStream os = conn.getOutputStream();
-            os.write(json.getBytes());
-            os.flush();
             
             htmlCode = conn.getResponseCode();
             String result = "";

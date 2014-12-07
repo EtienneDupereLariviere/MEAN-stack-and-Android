@@ -9,8 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.app.Activity;
 import android.util.Log;
 
+import com.example.utils.ConnectionStatus;
 import com.example.utils.Constants;
 
 public class PutRequest {
@@ -18,46 +20,56 @@ public class PutRequest {
     private String strUrl;
     private int htmlCode;
     private String json;
+    private Activity activity;
     
-    public PutRequest(String strUrl, String json)
+    public PutRequest(String strUrl, String json, Activity activity)
     {
         this.strUrl = strUrl;
         this.htmlCode = 0;
         this.json = json;
+        this.activity = activity;
     }
     
-    public void execute() {
+    public String execute() {
         try {
             URL url = new URL(strUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
+            conn.setRequestProperty(Constants.COOKIE, ConnectionStatus.getCookie(activity));
             conn.setDoInput(true);
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
-     
-            String input = "{\"title\":\"Test\",\"content\":\"Yahoo j'ai gagne\"}";
             
             OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
+            os.write(json.getBytes());
             os.flush();
             
             htmlCode = conn.getResponseCode();
+            String result= "";
      
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
-     
-            String output;          
-            while ((output = br.readLine()) != null) {
-                Log.i(Constants.PUT_REQUEST, output);
+            if (htmlCode == 200)
+            {
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
+         
+                String output;          
+                while ((output = br.readLine()) != null) {
+                    result += output;
+                    Log.i(Constants.PUT_REQUEST, output);
+                }
             }
      
             conn.disconnect();
+            
+            return result;
             
         } catch (MalformedURLException e) { 
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        return null;
     }
 }

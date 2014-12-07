@@ -8,5 +8,8 @@
     <!-- Login -->
     <string name="noUserPass">You must entered a username and a password</string>
     <string name="notGoodUserPass">You entered a wrong username/password combo</string>
+    
+    <!-- Article -->
+    <string name="noTitleContent">You must entered a title and a content</string>
 
 </resources>

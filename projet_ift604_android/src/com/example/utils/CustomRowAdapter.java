@@ -33,6 +33,7 @@ public class CustomRowAdapter extends ArrayAdapter<Article> {
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new ArticleHolder();
+            holder.dateAndUser = (TextView) row.findViewById(R.id.item_date_user);
             holder.title = (TextView) row.findViewById(R.id.item_title);
             holder.content = (TextView) row.findViewById(R.id.item_content);
             
@@ -49,6 +50,7 @@ public class CustomRowAdapter extends ArrayAdapter<Article> {
             row.setBackgroundResource(R.color.lightPink);
         
         Article article = articles[position];
+        holder.dateAndUser.setText("Posted on " + article.getCreated() + " by " + article.getUser().getDisplayName());
         holder.title.setText(article.getTitle());
         holder.content.setText(article.getContent());
         
@@ -57,6 +59,7 @@ public class CustomRowAdapter extends ArrayAdapter<Article> {
     
     static class ArticleHolder
     {
+        TextView dateAndUser;
         TextView title;
         TextView content;
     }

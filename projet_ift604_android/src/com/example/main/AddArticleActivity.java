@@ -1,13 +1,20 @@
 package com.example.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.example.communications.ArticleTransactions;
 import com.example.projet_ift604_android.R;
+import com.example.utils.Constants;
+import com.google.gson.Gson;
+
+import entity.Article;
 
 public class AddArticleActivity extends BaseActivity{
 	EditText TextTitreArt;
@@ -34,7 +41,22 @@ public class AddArticleActivity extends BaseActivity{
 	private OnClickListener btnValiderListener = new OnClickListener() {
 		
 		public void onClick(View v) {
-
+		    if (!TextTitreArt.getText().toString().equals("") &&
+                    !TextDescArt.getText().toString().equals(""))
+            {
+                Article newArticle = new Article();
+                newArticle.setTitle(TextTitreArt.getText().toString());
+                newArticle.setContent(TextDescArt.getText().toString());
+                
+                ArticleTransactions at = new ArticleTransactions(AddArticleActivity.this);
+                at.addArticle(newArticle);
+    
+                Intent intent = new Intent(AddArticleActivity.this, ListArticlesActivity.class);
+                startActivity(intent);
+                AddArticleActivity.this.finish();
+            }
+            else
+                Toast.makeText(AddArticleActivity.this, getResources().getString(R.string.noTitleContent), Toast.LENGTH_SHORT).show();
 		}
 	};
 }

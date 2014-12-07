@@ -2,16 +2,17 @@ package com.example.main;
 
 import java.util.Iterator;
 import java.util.List;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.example.communications.ArticleTransactions;
 import com.example.projet_ift604_android.R;
+import com.example.utils.Constants;
 import com.example.utils.CustomRowAdapter;
-
+import com.google.gson.Gson;
 import entity.Article;
 
 public class ListArticlesActivity extends BaseActivity implements OnItemClickListener{
@@ -50,7 +51,7 @@ public class ListArticlesActivity extends BaseActivity implements OnItemClickLis
             }
             
             CustomRowAdapter adapter = new CustomRowAdapter(ListArticlesActivity.this, 
-                    R.layout.custom_row, articlesArray);
+                    R.layout.article_custom_row, articlesArray);
             
             articleView.setAdapter(adapter);
         }
@@ -60,9 +61,12 @@ public class ListArticlesActivity extends BaseActivity implements OnItemClickLis
 	{
 	    if (articlesArray != null)
 	    {
-	        String articleId = articlesArray[position].get_id();
-	        Toast.makeText(ListArticlesActivity.this, articleId, Toast.LENGTH_SHORT).show();
+	        Article article = articlesArray[position];
+	        
+	        Intent intent = new Intent(ListArticlesActivity.this, ArticleActivity.class);
+	        intent.putExtra(Constants.ARTICLE_EXTRA, new Gson().toJson(article));
+	        startActivity(intent);	        
+	        ListArticlesActivity.this.finish();
 	    }
 	}
-	
 }

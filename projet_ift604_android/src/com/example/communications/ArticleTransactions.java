@@ -29,7 +29,7 @@ public class ArticleTransactions {
     
     public List<Article> getallArticles()
     {
-        String url = Constants.GET_ARTICLES_URL;
+        String url = Constants.ADD_GET_ARTICLES_URL;
         jsonStr = new GetRequest(Constants.SERVER_URL + url, null, activity).execute();
         
         if (jsonStr != null && !jsonStr.equals("")) {
@@ -76,6 +76,26 @@ public class ArticleTransactions {
         }
         
         return null;
+    }
+    
+    public void deleteArticle(String articleId)
+    {
+        String url = Constants.DELETE_EDIT_ARTICLE_URL + articleId;
+        jsonStr = new DeleteRequest(Constants.SERVER_URL + url, null, activity).execute();
+    }
+    
+    public void editArticle(Article article)
+    {
+        String url = Constants.DELETE_EDIT_ARTICLE_URL + article.get_id();
+        gson = gsonBuilder.registerTypeAdapter(Article.class, new ArticleAdapter.EditArticleAdapter()).create();
+        jsonStr = new PutRequest(Constants.SERVER_URL + url, gson.toJson(article), activity).execute();
+    }
+    
+    public void addArticle(Article article)
+    {
+        String url = Constants.ADD_GET_ARTICLES_URL;
+        gson = gsonBuilder.registerTypeAdapter(Article.class, new ArticleAdapter.AddArticleAdapter()).create();
+        jsonStr = new PostRequest(Constants.SERVER_URL + url, gson.toJson(article), activity).execute();
     }
 
 }
