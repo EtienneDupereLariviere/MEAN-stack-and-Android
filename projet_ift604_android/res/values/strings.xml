@@ -11,5 +11,11 @@
     
     <!-- Article -->
     <string name="noTitleContent">You must entered a title and a content</string>
+    
+    <!-- No categorie selected -->
+    <string name="noCatSelected">You must choose a category</string>
+    
+    <!-- Not all fields are filled -->
+    <string name="notCompleted">You must fill all fields and insert an image</string>
 
 </resources>

@@ -3,7 +3,7 @@ package com.example.utils;
 public class Constants {
     
     // Urls
-    public static final String SERVER_URL = "http://10.0.2.2:3000";
+    public static final String SERVER_URL = "http://192.168.43.110:3000";
     public static final String SIGN_IN_URL = "/auth/signin";
     public static final String SIGN_OUT_URL = "/auth/signout";
     public static final String ADD_GET_ARTICLES_URL = "/articles";
@@ -11,7 +11,7 @@ public class Constants {
     public static final String ADD_GET_HOUSES_URL = "/housetosells";
     public static final String DELETE_EDIT_HOUSE_URL = "/housetosells/";
     public static final String ADD_GET_USER_URL = "/auth/signup";
-    public static final String SEARCH_HOUSES = "/housetosell?category=&city=&maxPrice=&minPrice=";
+    public static final String SEARCH_HOUSES = "/housetosells?category=%s&city=%s&maxPrice=%s&minPrice=%s";
     
     // Request type
     public static final String PUT_REQUEST = "PUT_REQUEST";
@@ -30,5 +30,11 @@ public class Constants {
     
     // putExtra
     public static final String ARTICLE_EXTRA = "article_extra";
+    
+    // Used to browse images
+    public static final int SELECT_PICTURE = 1;
+    
+    // Other constants
+    public static final String ALL_CATEGORIES = "All categories";
 
 }

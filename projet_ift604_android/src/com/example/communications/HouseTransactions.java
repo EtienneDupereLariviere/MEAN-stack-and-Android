@@ -1,6 +1,13 @@
 package com.example.communications;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 
@@ -24,13 +31,26 @@ public class HouseTransactions {
         this.activity = activity;
     }
     
-    public List<Maison> getAllHouses(String categorie, String city, double maxPrice, double minPrice)
-    {
-        String url = Constants.SEARCH_HOUSES;
+    public List<Maison> getAllHouses(String category, String city, String maxPrice, String minPrice)
+    {      
+        String url = String.format(Constants.SEARCH_HOUSES, category, city, maxPrice, minPrice);
         jsonStr = new GetRequest(Constants.SERVER_URL + url, null, activity).execute();
         
         if (jsonStr != null && !jsonStr.equals("")) {
+            List<Maison> list = new ArrayList<Maison>();
+            JSONArray jsonArray;
+            try {
+                jsonArray = new JSONArray(jsonStr);
             
+                int length = jsonArray.length();
+                
+                for (int i = 0; i < length; i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                }
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         
         return null;

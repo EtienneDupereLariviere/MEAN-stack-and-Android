@@ -1,8 +1,14 @@
 package com.example.entity;
 
-public class Maison {
+import java.io.Serializable;
 
-	Double latitude;
+import com.example.utils.ImageType;
+
+public class Maison implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    
+    Double latitude;
 	Double longitude;
 	Categorie categorie;
 	String address;
@@ -10,9 +16,10 @@ public class Maison {
 	String caracteristic;
 	Integer nbChambre;
 	Integer price;
-	String image;
+	byte[] image;
 	User user;
 	String _id;
+	ImageType imageType;
 	
 	public Maison(){
 		super();
@@ -82,11 +89,11 @@ public class Maison {
 		this.price = price;
 	}
 
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -104,6 +111,14 @@ public class Maison {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public String getImageType() {
+        return imageType.getType();
+    }
+
+    public void setImageType(ImageType imageType) {
+        this.imageType = imageType;
     }
 
 }

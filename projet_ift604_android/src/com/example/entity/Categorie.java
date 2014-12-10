@@ -1,13 +1,25 @@
 package com.example.entity;
 
-public class Categorie {
+import java.io.Serializable;
 
-	String categorieName;
+public class Categorie implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    
+    String categorieName;
 	String categorieDesc;
 	String _id;
 	
 	public Categorie(){
 		super();
+	}
+	
+	public Categorie(String categorieName, String categorieDesc, String _id) {
+	    this.categorieName = categorieName;
+	    this.categorieDesc = categorieDesc;
+	    this._id = _id;
+	    
+	    CategorieCollection.addToList(this);
 	}
 	
 	public String getCategorieName() {
@@ -34,3 +46,4 @@ public class Categorie {
         this._id = _id;
     }
 }
+

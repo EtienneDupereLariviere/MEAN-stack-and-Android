@@ -1,12 +1,7 @@
 package com.example.communications;
 
-import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
-
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.widget.ImageView;
-
+import android.util.Base64;
 import com.example.entity.Maison;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -24,7 +19,7 @@ public class HouseAdapter {
 			jsonObject.addProperty("category", maison.getCategorie().getCategorieName());
 			jsonObject.addProperty("characteristics", maison.getCaracteristic());
 			jsonObject.addProperty("description", maison.getDescription());
-			jsonObject.addProperty("image", maison.getImage());
+			jsonObject.addProperty("image", maison.getImageType() + Base64.encodeToString(maison.getImage(), Base64.NO_WRAP));
 			jsonObject.addProperty("nbRoom", maison.getNbChambre());
 			jsonObject.addProperty("price", maison.getPrice());
 
@@ -38,12 +33,16 @@ public class HouseAdapter {
 				JsonSerializationContext jsc) {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("address", maison.getAddress());
-			jsonObject.addProperty("category", maison.getCategorie().getCategorieName());
+			jsonObject.addProperty("category", maison.getCategorie().get_id());
 			jsonObject.addProperty("characteristics", maison.getCaracteristic());
 			jsonObject.addProperty("description", maison.getDescription());
-			jsonObject.addProperty("image", maison.getImage());
+			jsonObject.addProperty("image", maison.getImageType() + Base64.encodeToString(maison.getImage(), Base64.NO_WRAP));
 			jsonObject.addProperty("nbRoom", maison.getNbChambre());
 			jsonObject.addProperty("price", maison.getPrice());
+			
+			// TODO: Change that
+			jsonObject.addProperty("latitude", 45.4034341);
+			jsonObject.addProperty("longitude", -71.89141760000001);
 
 			return jsonObject;
 		}
