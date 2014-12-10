@@ -8,6 +8,7 @@ public class Constants {
     public static final String SIGN_OUT_URL = "/auth/signout";
     public static final String ADD_GET_ARTICLES_URL = "/articles";
     public static final String DELETE_EDIT_ARTICLE_URL = "/articles/";
+    public static final String ADD_GET_USER_URL = "/auth/signup";
 
     // Request type
     public static final String PUT_REQUEST = "PUT_REQUEST";

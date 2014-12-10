@@ -5,12 +5,22 @@
     android:layout_height="fill_parent">
 
     <TextView 
+        android:id="@+id/item_date_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        />
+    
+    <TextView 
         android:id="@+id/item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:textSize="18sp"
         android:textColor="@color/black"
+        android:layout_below="@id/item_date_user"
         />
 
     <TextView 

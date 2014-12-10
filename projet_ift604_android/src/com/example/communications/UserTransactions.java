@@ -74,4 +74,11 @@ public class UserTransactions {
             ConnectionStatus.SignOut(activity);
         }
     }
+    
+    public void addUser(User user)
+    {
+        String url = Constants.ADD_GET_USER_URL;
+        gson = gsonBuilder.registerTypeAdapter(User.class, new UserAdapter.AddUserAdapter()).create();
+        jsonStr = new PostRequest(Constants.SERVER_URL + url, gson.toJson(user), activity).execute();
+    }
 }
