@@ -8,8 +8,11 @@ public class Constants {
     public static final String SIGN_OUT_URL = "/auth/signout";
     public static final String ADD_GET_ARTICLES_URL = "/articles";
     public static final String DELETE_EDIT_ARTICLE_URL = "/articles/";
+    public static final String ADD_GET_HOUSES_URL = "/housetosells";
+    public static final String DELETE_EDIT_HOUSE_URL = "/housetosells/";
     public static final String ADD_GET_USER_URL = "/auth/signup";
-
+    public static final String SEARCH_HOUSES = "/housetosell?category=&city=&maxPrice=&minPrice=";
+    
     // Request type
     public static final String PUT_REQUEST = "PUT_REQUEST";
     public static final String GET_REQUEST = "GET_REQUEST";
