@@ -1,5 +1,11 @@
 package com.example.main;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONTokener;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,13 +24,15 @@ import android.widget.Toast;
 import com.example.communications.HouseTransactions;
 import com.example.entity.CategorieCollection;
 import com.example.entity.Maison;
+import com.example.maps.PlacesAutoCompleteAdapter;
 import com.example.projet_ift604_android.R;
 import com.example.utils.Constants;
 import com.example.utils.Utils;
 
 public class AddMaisonActivity extends BaseActivity {
 
-	EditText TextAdresse;
+    AutoCompleteTextView TextAdresse;
+	//EditText TextAdresse;
 	EditText TextNbrChambre;
 	EditText TextPrix;
 	EditText TextCarac;
@@ -33,6 +42,9 @@ public class AddMaisonActivity extends BaseActivity {
 	Button btnValider;
 	ImageView image;
 	Uri imageUri;
+	
+	ArrayList<Double> housePosition;
+	PlacesAutoCompleteAdapter paca;
 	
 
 	@Override
@@ -46,7 +58,6 @@ public class AddMaisonActivity extends BaseActivity {
 	// TODO: Make generic function
 	private void populateSpinner()
     {
-        
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, CategorieCollection.getAllCategoryNames());
         
@@ -55,8 +66,21 @@ public class AddMaisonActivity extends BaseActivity {
     }
 
 	private void InitializeControls() {
+	    
+	    TextAdresse = (AutoCompleteTextView) findViewById(R.id.editTextAdresse);
+	    paca = new PlacesAutoCompleteAdapter(this, R.layout.list_item_maps);
+	    TextAdresse.setAdapter(paca);
+	    
+	    TextAdresse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) 
+            {
+                String placeId = paca.getListPlacesId().get(position);
+                housePosition = paca.getLocation(placeId);
+            }
+	    });           
+	    
 		// Get controls
-		TextAdresse = (EditText) findViewById(R.id.editTextAdresse);
+		//TextAdresse = (EditText) findViewById(R.id.editTextAdresse);
 		TextNbrChambre = (EditText) findViewById(R.id.editTextNbrChambre);
 		TextPrix = (EditText) findViewById(R.id.editTextPrix);
 		TextCarac = (EditText) findViewById(R.id.editTextCarac);
@@ -82,17 +106,24 @@ public class AddMaisonActivity extends BaseActivity {
 					&& !TextCarac.getText().toString().equals("")
 					&& !TextDescArt.getText().toString().equals("")
 					&& image.getDrawable() != null) {
-				Maison newMaison = new Maison();
-				newMaison.setAddress(TextAdresse.getText().toString());
-				newMaison.setNbChambre(Integer.parseInt(TextNbrChambre.getText().toString()));
-				newMaison.setPrice(Integer.parseInt(TextPrix.getText().toString()));
-				newMaison.setCaracteristic(TextCarac.getText().toString());
-				newMaison.setDescription(TextDescArt.getText().toString());
-				
+
 				String categoryName = SpinnerCategorie.getSelectedItem().toString();
 				
 				if (!categoryName.equals(Constants.ALL_CATEGORIES))
 				{
+				    Maison newMaison = new Maison();
+	                newMaison.setAddress(TextAdresse.getText().toString());
+	                newMaison.setNbChambre(Integer.parseInt(TextNbrChambre.getText().toString()));
+	                newMaison.setPrice(Integer.parseInt(TextPrix.getText().toString()));
+	                newMaison.setCaracteristic(TextCarac.getText().toString());
+	                newMaison.setDescription(TextDescArt.getText().toString());
+	                newMaison.setCategorie(CategorieCollection.findCategorie(categoryName));
+	                
+				    if (housePosition != null) {
+				        newMaison.setLongitude(housePosition.get(0));
+				        newMaison.setLatitude(housePosition.get(1));
+				    }
+	                
 				    byte[] byteImage = null;
 				    
 				    try {
@@ -102,8 +133,6 @@ public class AddMaisonActivity extends BaseActivity {
 				    } catch (Exception e) {
                         Log.d("AddMaison", "Problem with ImageToByte " + e.getMessage());
                     }
-				    
-    	            newMaison.setCategorie(CategorieCollection.findCategorie(categoryName));
     				
     				HouseTransactions ht = new HouseTransactions(
     						AddMaisonActivity.this);
@@ -138,7 +167,6 @@ public class AddMaisonActivity extends BaseActivity {
 	};
 
 	private OnClickListener btnChoisirImageListener = new OnClickListener() {
-
 		public void onClick(View v) {
 		    Intent intent = new Intent();
             intent.setType("image/*");

@@ -2,8 +2,13 @@ package com.example.utils;
 
 public class Constants {
     
-    // Urls
+    // Use this on when working on emulator
+    //public static final String SERVER_URL = "http://10.0.2.2:3000";
+    
+    // Use this one when working with phone (replace with your ipv4 address)
     public static final String SERVER_URL = "http://192.168.43.110:3000";
+    
+    // Urls
     public static final String SIGN_IN_URL = "/auth/signin";
     public static final String SIGN_OUT_URL = "/auth/signout";
     public static final String ADD_GET_ARTICLES_URL = "/articles";
@@ -33,6 +38,11 @@ public class Constants {
     
     // Used to browse images
     public static final int SELECT_PICTURE = 1;
+    
+    // Google Maps
+    public static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
+    public static final String TYPE_AUTOCOMPLETE = "/autocomplete";
+    public static final String API_KEY = "YOUR_API_KEY";
     
     // Other constants
     public static final String ALL_CATEGORIES = "All categories";

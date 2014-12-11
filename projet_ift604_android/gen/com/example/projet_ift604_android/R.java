@@ -115,7 +115,8 @@ public final class R {
         public static final int activity_searchhouse=0x7f030008;
         public static final int activity_signup=0x7f030009;
         public static final int article_custom_row=0x7f03000a;
-        public static final int maison_custom_row=0x7f03000b;
+        public static final int list_item_maps=0x7f03000b;
+        public static final int maison_custom_row=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f070000;

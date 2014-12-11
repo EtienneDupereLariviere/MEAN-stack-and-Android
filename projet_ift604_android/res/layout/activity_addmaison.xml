@@ -39,11 +39,16 @@
                 android:layout_marginTop="10dp"
                 android:text="Adresse" />
 
-            <EditText
+           <!--  <EditText
                 android:id="@+id/editTextAdresse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" />
+                android:ems="10" />--> 
+            
+            <AutoCompleteTextView android:id="@+id/editTextAdresse"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:completionThreshold="1"/>
 
             <TextView
                 android:id="@+id/textViewDesc"
@@ -67,7 +72,7 @@
                 android:id="@+id/editTextNbrChambre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10" >
+                 >
 
                 <requestFocus />
             </EditText>

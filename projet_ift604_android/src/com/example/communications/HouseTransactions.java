@@ -48,7 +48,6 @@ public class HouseTransactions {
                     JSONObject obj = jsonArray.getJSONObject(i);
                 }
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

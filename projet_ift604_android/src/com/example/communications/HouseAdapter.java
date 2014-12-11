@@ -22,6 +22,8 @@ public class HouseAdapter {
 			jsonObject.addProperty("image", maison.getImageType() + Base64.encodeToString(maison.getImage(), Base64.NO_WRAP));
 			jsonObject.addProperty("nbRoom", maison.getNbChambre());
 			jsonObject.addProperty("price", maison.getPrice());
+			jsonObject.addProperty("latitude", maison.getLatitude());
+            jsonObject.addProperty("longitude", maison.getLongitude());
 
 			return jsonObject;
 		}
@@ -39,10 +41,8 @@ public class HouseAdapter {
 			jsonObject.addProperty("image", maison.getImageType() + Base64.encodeToString(maison.getImage(), Base64.NO_WRAP));
 			jsonObject.addProperty("nbRoom", maison.getNbChambre());
 			jsonObject.addProperty("price", maison.getPrice());
-			
-			// TODO: Change that
-			jsonObject.addProperty("latitude", 45.4034341);
-			jsonObject.addProperty("longitude", -71.89141760000001);
+			jsonObject.addProperty("latitude", maison.getLatitude());
+			jsonObject.addProperty("longitude", maison.getLongitude());
 
 			return jsonObject;
 		}
