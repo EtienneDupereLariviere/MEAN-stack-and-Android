@@ -20,7 +20,7 @@ public class Utils {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		resized.compress(Bitmap.CompressFormat.PNG, 100, baos);
 
-		return baos.toByteArray();
+		return baos.toByteArray(); 
 	}
 	
 	public static void setImageType(Context context, Uri uriImage, Maison newMaison)

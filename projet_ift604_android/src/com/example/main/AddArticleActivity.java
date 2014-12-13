@@ -31,11 +31,11 @@ public class AddArticleActivity extends BaseActivity{
 	{
 		// Get controls 	
 		TextTitreArt = (EditText) findViewById(R.id.editTextTitreArt);
-		TextDescArt = (EditText) findViewById(R.id.editTextDescArt);
+		TextDescArt = (EditText) findViewById(R.id.editTextDescArt); 
 		
 		btnValider = (Button) findViewById(R.id.btnValider);
 		// Assign a function to them
-		btnValider.setOnClickListener(btnValiderListener);
+		btnValider.setOnClickListener(btnValiderListener); 
 	}
 	
 	private OnClickListener btnValiderListener = new OnClickListener() {
@@ -55,7 +55,7 @@ public class AddArticleActivity extends BaseActivity{
                 startActivity(intent);
                 AddArticleActivity.this.finish();
             }
-            else
+            else 
                 Toast.makeText(AddArticleActivity.this, getResources().getString(R.string.noTitleContent), Toast.LENGTH_SHORT).show();
 		}
 	};

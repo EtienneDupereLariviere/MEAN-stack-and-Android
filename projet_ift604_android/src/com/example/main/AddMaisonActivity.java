@@ -161,7 +161,7 @@ public class AddMaisonActivity extends BaseActivity {
 			// your code here
 		}
 
-		public void onNothingSelected(AdapterView<?> parentView) {
+		public void onNothingSelected(AdapterView<?> parentView) { 
 			// your code here
 		}
 	};

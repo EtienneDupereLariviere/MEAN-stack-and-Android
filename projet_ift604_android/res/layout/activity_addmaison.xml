@@ -134,6 +134,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:text="Valider" />
+            
+            <fragment
+		        android:id="@+id/map"
+		        android:layout_width="300dp"
+		        android:layout_height="300dp"
+		        class="com.google.android.gms.maps.MapFragment" 
+		        android:name="com.example.main.AddMaisonActivity" />
+            
         </LinearLayout>
     </ScrollView>
 
