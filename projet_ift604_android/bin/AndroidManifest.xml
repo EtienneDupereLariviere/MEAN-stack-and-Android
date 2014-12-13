@@ -82,6 +82,8 @@
             android:label="@string/app_name" >
             
         </activity>
+        
+     
          
         <!-- Use for Google Maps --> 
          

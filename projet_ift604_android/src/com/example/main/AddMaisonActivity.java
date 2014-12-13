@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 import com.example.communications.HouseTransactions;
 import com.example.entity.CategorieCollection;
@@ -51,6 +53,21 @@ public class AddMaisonActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addmaison);
+		
+		TabHost tabHost= (TabHost)findViewById(R.id.tabHost);
+		tabHost.setup();
+
+		TabSpec spec1=tabHost.newTabSpec("Maison");
+		spec1.setContent(R.id.tab1);
+		spec1.setIndicator("Maison");
+
+		TabSpec spec2=tabHost.newTabSpec("Carte");
+		spec2.setIndicator("Carte");
+		spec2.setContent(R.id.tab2);
+		
+		tabHost.addTab(spec1);
+		tabHost.addTab(spec2);
+		
 		InitializeControls();
 		populateSpinner();
 	}
