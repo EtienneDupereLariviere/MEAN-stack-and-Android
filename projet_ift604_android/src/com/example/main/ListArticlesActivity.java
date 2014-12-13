@@ -12,7 +12,7 @@ import com.example.communications.ArticleTransactions;
 import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
 import com.example.utils.Constants;
-import com.example.utils.CustomRowAdapter;
+import com.example.utils.ArticleRowAdapter;
 import com.google.gson.Gson;
 
 public class ListArticlesActivity extends BaseActivity implements OnItemClickListener{
@@ -50,7 +50,7 @@ public class ListArticlesActivity extends BaseActivity implements OnItemClickLis
                 }
             }
             
-            CustomRowAdapter adapter = new CustomRowAdapter(ListArticlesActivity.this, 
+            ArticleRowAdapter adapter = new ArticleRowAdapter(ListArticlesActivity.this, 
                     R.layout.article_custom_row, articlesArray);
             
             articleView.setAdapter(adapter);

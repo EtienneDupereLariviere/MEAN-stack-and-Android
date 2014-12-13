@@ -1,8 +1,6 @@
 package com.example.main;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.communications.HouseTransactions;
+import com.example.entity.Categorie;
 import com.example.entity.CategorieCollection;
 import com.example.projet_ift604_android.R;
+import com.example.utils.Constants;
 
 public class SearchHouseActivity extends BaseActivity {
 	EditText TextPrixMinimum;
@@ -82,11 +81,18 @@ public class SearchHouseActivity extends BaseActivity {
 		    if (category.equals("All categories")) {
 		        category = "";
 		    }
+		    		    
+		    Categorie categorie = CategorieCollection.findCategorie(category);
+		    
+		    String categorieId = categorie.get_id();
 		    
 		    if (minPrice >= 0 && maxPrice > 0 && minPrice != maxPrice && minPrice < maxPrice) {
-    		    HouseTransactions ht = new HouseTransactions(SearchHouseActivity.this);
-    		    ht.getAllHouses(category, city, 
-    		            TextPrixMaximum.getText().toString(), TextPrixMinimum.getText().toString());
+       		    Intent intent = new Intent(SearchHouseActivity.this, ListMaisonActivity.class);
+                intent.putExtra(Constants.CATEGORY_EXTRA, categorieId);
+                intent.putExtra(Constants.CITY_EXTRA, city);
+                intent.putExtra(Constants.PRIXMAX_EXTRA, TextPrixMaximum.getText().toString());
+                intent.putExtra(Constants.PRIXMIN_EXTRA, TextPrixMinimum.getText().toString());
+    		    startActivity(intent);
 		    }
 		}
 	};

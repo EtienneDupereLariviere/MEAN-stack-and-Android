@@ -27,6 +27,16 @@ public class CategorieCollection {
         return null;
     }
     
+    public static Categorie findCategorieById(String catId)
+    {
+        for (Categorie cat : listCat) {
+            if(cat.get_id() != null && cat.get_id().equals(catId)){
+                return cat; 
+            }
+        }
+        
+        return null;
+    }
     public static List<String> getAllCategoryNames()
     {
         List<String> listStr = new ArrayList<String>();

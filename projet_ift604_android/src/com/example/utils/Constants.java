@@ -15,9 +15,9 @@ public class Constants {
     public static final String DELETE_EDIT_ARTICLE_URL = "/articles/";
     public static final String ADD_GET_HOUSES_URL = "/housetosells";
     public static final String DELETE_EDIT_HOUSE_URL = "/housetosells/";
-    public static final String ADD_GET_USER_URL = "/auth/signup";
+    public static final String ADD_GET_USER_URL = "/auth/signup";    
     public static final String SEARCH_HOUSES = "/housetosells?category=%s&city=%s&maxPrice=%s&minPrice=%s";
-    
+    public static final String SEARCH_ALL_HOUSES = "/housetosells?category=&city=&maxPrice=999999999&minPrice=0";
     // Request type
     public static final String PUT_REQUEST = "PUT_REQUEST";
     public static final String GET_REQUEST = "GET_REQUEST";
@@ -35,6 +35,10 @@ public class Constants {
     
     // putExtra
     public static final String ARTICLE_EXTRA = "article_extra";
+    public static final String CATEGORY_EXTRA = "category_extra";
+    public static final String CITY_EXTRA = "city_extra";
+    public static final String PRIXMAX_EXTRA = "prixmax_extra";
+    public static final String PRIXMIN_EXTRA = "prixmin_extra";
     
     // Used to browse images
     public static final int SELECT_PICTURE = 1;

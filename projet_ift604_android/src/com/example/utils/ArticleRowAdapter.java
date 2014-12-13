@@ -10,13 +10,13 @@ import android.widget.TextView;
 import com.example.entity.Article;
 import com.example.projet_ift604_android.R;
 
-public class CustomRowAdapter extends ArrayAdapter<Article> {
+public class ArticleRowAdapter extends ArrayAdapter<Article> {
 
     private Context context; 
     private int layoutResourceId;    
     private Article articles[] = null;
     
-    public CustomRowAdapter(Context context, int layoutResourceId, Article[] articles) {
+    public ArticleRowAdapter(Context context, int layoutResourceId, Article[] articles) {
         super(context, layoutResourceId, articles);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
