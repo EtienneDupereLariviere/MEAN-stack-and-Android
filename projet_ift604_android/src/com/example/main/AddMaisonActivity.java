@@ -1,12 +1,10 @@
 package com.example.main;
 
 import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONTokener;
+import java.util.List;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,15 +12,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.communications.HouseTransactions;
 import com.example.entity.CategorieCollection;
 import com.example.entity.Maison;
@@ -30,11 +30,21 @@ import com.example.maps.PlacesAutoCompleteAdapter;
 import com.example.projet_ift604_android.R;
 import com.example.utils.Constants;
 import com.example.utils.Utils;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AddMaisonActivity extends BaseActivity {
 
     AutoCompleteTextView TextAdresse;
-	//EditText TextAdresse;
+    
+    ImageView clearAddress;
+    TextView distanceBetween;
 	EditText TextNbrChambre;
 	EditText TextPrix;
 	EditText TextCarac;
@@ -45,16 +55,18 @@ public class AddMaisonActivity extends BaseActivity {
 	ImageView image;
 	Uri imageUri;
 	
-	ArrayList<Double> housePosition;
+	List<Marker> markers;
+	GoogleMap map;
+	LatLng currentPosition;
+	ArrayList<Double> housePosition = null;
 	PlacesAutoCompleteAdapter paca;
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_addmaison);
 		
-		TabHost tabHost= (TabHost)findViewById(R.id.tabHost);
+		final TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
 		tabHost.setup();
 
 		TabSpec spec1=tabHost.newTabSpec("Maison");
@@ -68,19 +80,41 @@ public class AddMaisonActivity extends BaseActivity {
 		tabHost.addTab(spec1);
 		tabHost.addTab(spec2);
 		
+		// Load the map before working with it
+		tabHost.setOnTabChangedListener(new OnTabChangeListener(){
+		    public void onTabChanged(String tabId) {
+		        if (tabHost.getCurrentTab() == 1) {
+		            map.setOnMapLoadedCallback(new OnMapLoadedCallback() {
+		                public void onMapLoaded() {
+		                    if (housePosition != null) {
+		                        LatLng houseLatLng = new LatLng(housePosition.get(1), housePosition.get(0));
+
+		                        map.clear();
+		                        
+		                        getCurrentLocation();
+		                        
+		                        markers.add(map.addMarker(new MarkerOptions()
+		                            .position(houseLatLng)
+		                            .title("The house is there")
+		                            .alpha(0.7f)
+		                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+		                        
+		                        double distance = Utils.CalculationByDistance(currentPosition, houseLatLng);
+		                        
+		                        distanceBetween.setText("The distance is " + distance + " km");
+		                        
+		                        Utils.zoomOnMap(markers, map);
+		                    }
+		                }
+		            });
+	            }
+		    }
+		});
+		
 		InitializeControls();
-		populateSpinner();
+		Utils.populateSpinner(SpinnerCategorie, AddMaisonActivity.this);
+		getCurrentLocation();
 	}
-	
-	// TODO: Make generic function
-	private void populateSpinner()
-    {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, CategorieCollection.getAllCategoryNames());
-        
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        SpinnerCategorie.setAdapter(adapter);
-    }
 
 	private void InitializeControls() {
 	    
@@ -97,7 +131,8 @@ public class AddMaisonActivity extends BaseActivity {
 	    });           
 	    
 		// Get controls
-		//TextAdresse = (EditText) findViewById(R.id.editTextAdresse);
+	    clearAddress = (ImageView) findViewById(R.id.redx);
+	    distanceBetween = (TextView) findViewById(R.id.distanceBetween);
 		TextNbrChambre = (EditText) findViewById(R.id.editTextNbrChambre);
 		TextPrix = (EditText) findViewById(R.id.editTextPrix);
 		TextCarac = (EditText) findViewById(R.id.editTextCarac);
@@ -107,12 +142,16 @@ public class AddMaisonActivity extends BaseActivity {
 		image = (ImageView) findViewById(R.id.imgHouse_add);
 		// Assign a function to them
 		btnValider.setOnClickListener(btnValiderListener);
+		
+		// Initialize markerList
+		markers = new ArrayList<Marker>();
 
 		SpinnerCategorie.setOnItemSelectedListener(SpinnerCategorieListener);
-
 		btnChoisirImage = (Button) findViewById(R.id.btnChoisirImage);
+		
 		// Assign a function to them
 		btnChoisirImage.setOnClickListener(btnChoisirImageListener);
+		clearAddress.setOnClickListener(imageClearAddressListener);
 	}
 
 	private OnClickListener btnValiderListener = new OnClickListener() {
@@ -192,12 +231,44 @@ public class AddMaisonActivity extends BaseActivity {
 		}
 	};
 	
+	private OnClickListener imageClearAddressListener = new OnClickListener() {
+        public void onClick(View v) {
+            TextAdresse.setText("");
+            if (markers.size() > 1)
+                markers.remove(markers.size() - 1);
+        }
+    };
+	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == Constants.SELECT_PICTURE) {
                 imageUri = data.getData();
                 image.setImageURI(imageUri);
+                image.setVisibility(View.VISIBLE);
             }
+        }
+    }
+	
+	private void getCurrentLocation()
+    {
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        
+        Location loc = Utils.getCurrentLocation(AddMaisonActivity.this);
+        
+        if (loc == null) {
+            // Default position
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Constants.SHERBROOKE_POSITION, 15));
+        }
+        else {
+            currentPosition = new LatLng(loc.getLatitude(), loc.getLongitude());
+            
+            markers.add(map.addMarker(new MarkerOptions()
+                .position(currentPosition)
+                .title("I'm here")
+                .alpha(0.7f)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))));
+            
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 15));
         }
     }
 }
