@@ -79,12 +79,15 @@ public class SearchHouseActivity extends BaseActivity {
 		    String city = TextVille.getText().toString().trim(); 
 		    
 		    if (category.equals("All categories")) {
-		        category = "";
+		        category = ""; 
 		    }
 		    		    
 		    Categorie categorie = CategorieCollection.findCategorie(category);
 		    
-		    String categorieId = categorie.get_id();
+		    String categorieId = "";
+		    
+		    if (categorie != null)
+		        categorieId = categorie.get_id();
 		    
 		    if (minPrice >= 0 && maxPrice > 0 && minPrice != maxPrice && minPrice < maxPrice) {
        		    Intent intent = new Intent(SearchHouseActivity.this, ListMaisonActivity.class);

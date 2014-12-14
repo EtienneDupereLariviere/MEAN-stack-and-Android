@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <item android:id="@+id/menuAccueil" android:alphabeticShortcut="a"
-        android:title="Accueil" android:orderInCategory="1" />
+    <!--<item android:id="@+id/menuAccueil" android:alphabeticShortcut="a"
+        android:title="Accueil" android:orderInCategory="1" />-->
     
     <item android:id="@+id/menuArticles" android:alphabeticShortcut="b"
         android:title="Articles" android:orderInCategory="2">

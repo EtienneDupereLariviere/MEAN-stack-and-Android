@@ -83,7 +83,7 @@ public class HouseRowAdapter extends ArrayAdapter<Maison> {
 
 	public Bitmap StringToBitMap(String encodedString) {
 		try {
-			byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+			byte[] encodeByte = Base64.decode(encodedString, Base64.NO_WRAP);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
 					encodeByte.length);
 			return bitmap;

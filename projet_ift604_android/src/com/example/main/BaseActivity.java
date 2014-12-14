@@ -27,9 +27,9 @@ public class BaseActivity extends Activity {
 
 		Intent intent = null;
 		switch (item.getItemId()) {
-		case R.id.menuAccueil:
+		/*case R.id.menuAccueil:
 			intent = new Intent(BaseActivity.this, MainActivity.class);
-			break;
+			break;*/
 		case R.id.submenuListArticle:
 			intent = new Intent(BaseActivity.this, ListArticlesActivity.class);
 			break;
