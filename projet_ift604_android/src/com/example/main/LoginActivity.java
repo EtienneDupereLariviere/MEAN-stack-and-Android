@@ -1,5 +1,11 @@
 package com.example.main;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.UnknownHostException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.communications.UserTransactions;
@@ -15,13 +22,13 @@ import com.example.entity.User;
 import com.example.projet_ift604_android.R;
 import com.example.utils.ConnectionStatus;
 
-
 public class LoginActivity extends Activity {
 
 	EditText userName;
 	EditText password;
 	Button btnLogin;
 	Button btnSignup;
+	TextView textServerOffline;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +42,31 @@ public class LoginActivity extends Activity {
 		
 		initializeControls();
 		
-		if (ConnectionStatus.IsSignedIn(LoginActivity.this))
-		    logIn();
-
+		// Check if the connection is available
+		Socket socket = new Socket();
+        boolean reachable = false;
+        
+        try {
+            SocketAddress sockaddr = new InetSocketAddress("192.168.43.110", 3000);
+            socket.connect(sockaddr, 4000);
+            reachable = true;
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {            
+            if (socket != null) try { socket.close(); } catch(IOException e) {}
+        }
+        
+        if (reachable) {
+            if (ConnectionStatus.IsSignedIn(LoginActivity.this))
+                logIn();
+        }
+        else {
+            textServerOffline.setVisibility(View.VISIBLE);
+            btnLogin.setEnabled(false);
+            btnSignup.setEnabled(false);
+        }
 	}
 
 	private OnClickListener btnLoginListener = new OnClickListener() {
@@ -84,5 +113,7 @@ public class LoginActivity extends Activity {
 
         btnSignup = (Button) findViewById(R.id.btnLoginSignup);
         btnSignup.setOnClickListener(btnLoginSignupListener);
+        
+        textServerOffline = (TextView) findViewById(R.id.textServerOffline);
 	}
 }

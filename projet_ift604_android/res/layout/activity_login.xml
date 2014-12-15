@@ -63,6 +63,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="S&apos;enregistrer" />
+        
+        <TextView
+            android:id="@+id/textServerOffline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/serverOffline"
+            android:layout_marginTop="50dp"
+            android:textSize="20sp"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </RelativeLayout>
