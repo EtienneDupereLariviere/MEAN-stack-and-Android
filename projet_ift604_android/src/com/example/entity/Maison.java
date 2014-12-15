@@ -26,7 +26,7 @@ public class Maison implements Serializable {
 	}
 	
 	public Maison(Categorie categorie, Integer price, String description, byte[] image, String caracteristic,
-			      double longitude, double latitude, Integer nbChambre, String address){
+			      double longitude, double latitude, Integer nbChambre, String address, User user, String _id){
 		this.categorie = categorie;
 		this.price = price;
 		this.description = description;
@@ -36,6 +36,8 @@ public class Maison implements Serializable {
 		this.latitude = latitude;
 		this.nbChambre = nbChambre;
 		this.address = address;
+		this.user = user;
+		this._id = _id;
 	}
 	
 	public Double getLatitude() {

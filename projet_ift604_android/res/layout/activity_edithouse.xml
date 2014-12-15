@@ -1,0 +1,196 @@
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabHost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TabWidget
+        android:id="@android:id/tabs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@android:id/tabcontent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/tab1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingTop="85px" >
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/textViewTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Modifier un article"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/textViewAdresse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Adresse" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <AutoCompleteTextView
+                                android:id="@+id/editTextAdresse"
+                                android:layout_width="300dp"
+                                android:layout_height="115dp"
+                                android:layout_gravity="left"
+                                android:completionThreshold="1" />
+
+                            <ImageView
+                                android:id="@+id/redx"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:contentDescription="redx"
+                                android:src="@drawable/redx" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textViewUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp" />
+
+                        <TextView
+                            android:id="@+id/textViewCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Categorie" />
+
+                        <Spinner
+                            android:id="@+id/spinnerCategorie"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/textViewNbrRoom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Nombre de chambres" />
+
+                        <EditText
+                            android:id="@+id/edittextViewNbrRoom"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="[NbrRoom]"
+                            android:inputType="number" />
+
+                        <TextView
+                            android:id="@+id/textViewPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Prix" />
+
+                        <EditText
+                            android:id="@+id/edittextViewPrice"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="[price]"
+                            android:inputType="number" />
+
+                        <TextView
+                            android:id="@+id/textViewCharacteristics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Caractéristiques" />
+
+                        <EditText
+                            android:id="@+id/edittextViewCharacteristics"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="[Characteristics]" />
+
+                        <TextView
+                            android:id="@+id/textViewDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Description" />
+
+                        <EditText
+                            android:id="@+id/edittextViewDescription"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="[Description]" />
+
+                        <Button
+                            android:id="@+id/btnChoisirImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:text="Choisir image..." />
+
+                        <ImageView
+                            android:id="@+id/maison_image"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp" />
+
+                        <Button
+                            android:id="@+id/btnValider_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Valider" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="100px" >
+
+            <TextView
+                android:id="@+id/distanceBetween"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp" />
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.example.main.EditHouseActivity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="com.google.android.gms.maps.MapFragment"
+                android:gravity="center"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+    </FrameLayout>
+
+</TabHost>

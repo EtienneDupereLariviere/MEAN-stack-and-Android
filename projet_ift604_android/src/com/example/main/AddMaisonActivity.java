@@ -55,7 +55,6 @@ public class AddMaisonActivity extends BaseActivity {
 	ImageView image;
 	Uri imageUri;
 	
-	List<Marker> markers;
 	GoogleMap map;
 	LatLng currentPosition;
 	ArrayList<Double> housePosition = null;
@@ -87,23 +86,8 @@ public class AddMaisonActivity extends BaseActivity {
 		            map.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 		                public void onMapLoaded() {
 		                    if (housePosition != null) {
-		                        LatLng houseLatLng = new LatLng(housePosition.get(1), housePosition.get(0));
-
-		                        map.clear();
-		                        
-		                        getCurrentLocation();
-		                        
-		                        markers.add(map.addMarker(new MarkerOptions()
-		                            .position(houseLatLng)
-		                            .title("The house is there")
-		                            .alpha(0.7f)
-		                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
-		                        
-		                        double distance = Utils.CalculationByDistance(currentPosition, houseLatLng);
-		                        
-		                        distanceBetween.setText("The distance is " + distance + " km");
-		                        
-		                        Utils.zoomOnMap(markers, map);
+		                        distanceBetween.setText(Utils.setBothLocation(map, AddMaisonActivity.this,
+		                                new LatLng(housePosition.get(1), housePosition.get(0))));
 		                    }
 		                }
 		            });
@@ -112,8 +96,6 @@ public class AddMaisonActivity extends BaseActivity {
 		});
 		
 		InitializeControls();
-		Utils.populateSpinner(SpinnerCategorie, AddMaisonActivity.this);
-		getCurrentLocation();
 	}
 
 	private void InitializeControls() {
@@ -143,15 +125,19 @@ public class AddMaisonActivity extends BaseActivity {
 		// Assign a function to them
 		btnValider.setOnClickListener(btnValiderListener);
 		
-		// Initialize markerList
-		markers = new ArrayList<Marker>();
-
 		SpinnerCategorie.setOnItemSelectedListener(SpinnerCategorieListener);
 		btnChoisirImage = (Button) findViewById(R.id.btnChoisirImage);
 		
 		// Assign a function to them
 		btnChoisirImage.setOnClickListener(btnChoisirImageListener);
 		clearAddress.setOnClickListener(imageClearAddressListener);
+		
+		// Populate the comboBox
+		Utils.populateSpinner(SpinnerCategorie, AddMaisonActivity.this);
+		
+		// Fill Google Map
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        Utils.getCurrentLocation(map, AddMaisonActivity.this, null);
 	}
 
 	private OnClickListener btnValiderListener = new OnClickListener() {
@@ -193,10 +179,8 @@ public class AddMaisonActivity extends BaseActivity {
     				HouseTransactions ht = new HouseTransactions(
     						AddMaisonActivity.this);
     				ht.addHouse(newMaison);
-    
-    				Intent intent = new Intent(AddMaisonActivity.this,
-    						ListMaisonActivity.class);
-    				startActivity(intent);
+                    
+    				startActivity(Utils.defaultSearchHouses(AddMaisonActivity.this));
     				AddMaisonActivity.this.finish();
 				}
 				else
@@ -234,8 +218,6 @@ public class AddMaisonActivity extends BaseActivity {
 	private OnClickListener imageClearAddressListener = new OnClickListener() {
         public void onClick(View v) {
             TextAdresse.setText("");
-            if (markers.size() > 1)
-                markers.remove(markers.size() - 1);
         }
     };
 	
@@ -246,29 +228,6 @@ public class AddMaisonActivity extends BaseActivity {
                 image.setImageURI(imageUri);
                 image.setVisibility(View.VISIBLE);
             }
-        }
-    }
-	
-	private void getCurrentLocation()
-    {
-        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        
-        Location loc = Utils.getCurrentLocation(AddMaisonActivity.this);
-        
-        if (loc == null) {
-            // Default position
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Constants.SHERBROOKE_POSITION, 15));
-        }
-        else {
-            currentPosition = new LatLng(loc.getLatitude(), loc.getLongitude());
-            
-            markers.add(map.addMarker(new MarkerOptions()
-                .position(currentPosition)
-                .title("I'm here")
-                .alpha(0.7f)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))));
-            
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 15));
         }
     }
 }

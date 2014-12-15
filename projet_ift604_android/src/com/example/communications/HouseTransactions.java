@@ -13,6 +13,7 @@ import android.util.Base64;
 import com.example.entity.Categorie;
 import com.example.entity.CategorieCollection;
 import com.example.entity.Maison;
+import com.example.entity.User;
 import com.example.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,6 +71,7 @@ public class HouseTransactions {
 
 				int length = jsonArray.length();
 
+				String houseID;
 				String categoryID;
 				String image;
 				String price;
@@ -79,11 +81,21 @@ public class HouseTransactions {
 				String latitude;
 				String longitude;
 				String characteristics;
-				
+				String userId;
+                String userDisplayName;
 
 				for (int i = 0; i < length; i++) {
 					JSONObject obj = jsonArray.getJSONObject(i);
+					JSONObject userField = obj.getJSONObject("user");
 
+                    userId = userField.getString("_id");
+                    userDisplayName = userField.getString("displayName");
+                    
+                    User user = new User();
+                    user.set_id(userId);
+                    user.setDisplayName(userDisplayName);
+
+                    houseID = obj.getString("_id");
 					categoryID = obj.getString("category");
 					image = obj.getString("image");
 					price = obj.getString("price");
@@ -98,7 +110,7 @@ public class HouseTransactions {
 
 					list.add(new Maison(categorie, Integer.parseInt(price),
 							description, Base64.decode(image, Base64.NO_WRAP), characteristics, Double.parseDouble(longitude),
-							Double.parseDouble(latitude), Integer.parseInt(nbrRoom), address));
+							Double.parseDouble(latitude), Integer.parseInt(nbrRoom), address, user,  houseID));
 				}
 
 				return list;

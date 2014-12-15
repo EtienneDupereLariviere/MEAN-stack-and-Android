@@ -23,9 +23,32 @@
          android:layout_height="wrap_content"
          android:text="[TitreActivity]"
          android:textSize="30sp" />
+     
+     <LinearLayout
+     	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:orientation="horizontal" >
+     
+	     <Button
+	        android:id="@+id/articleBtnEdit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:visibility="gone"
+	        android:layout_marginTop="10dp"
+	        android:text="Edit" />
+	     
+	     <Button
+	        android:id="@+id/articleBtnDelete"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:visibility="gone"
+	        android:layout_marginTop="10dp"
+	        android:text="Delete" />
+	     
+     </LinearLayout>
     
      <TextView
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/textViewDateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,22 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="[Description]" />
-     
-     <Button
-            android:id="@+id/articleBtnEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:layout_marginTop="20dp"
-            android:text="Edit" />
-     
-     <Button
-            android:id="@+id/articleBtnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:text="Delete" />
-     
  </LinearLayout>
 
 </RelativeLayout>
