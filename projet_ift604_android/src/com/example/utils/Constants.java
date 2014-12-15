@@ -5,10 +5,10 @@ import com.google.android.gms.maps.model.LatLng;
 public class Constants {
     
     // Use this on when working on emulator
-    //public static final String SERVER_URL = "http://10.0.2.2:3000";
+    public static final String SERVER_URL = "http://10.0.2.2:3000";
     
     // Use this one when working with phone (replace with your ipv4 address)
-    public static final String SERVER_URL = "http://192.168.43.110:3000";
+    //public static final String SERVER_URL = "http://192.168.43.110:3000";
     
     // Urls
     public static final String SIGN_IN_URL = "/auth/signin";
@@ -38,10 +38,17 @@ public class Constants {
     
     // putExtra
     public static final String ARTICLE_EXTRA = "article_extra";
+    public static final String HOUSE_EXTRA = "house_extra";
     public static final String CATEGORY_EXTRA = "category_extra";
     public static final String CITY_EXTRA = "city_extra";
     public static final String PRIXMAX_EXTRA = "prixmax_extra";
     public static final String PRIXMIN_EXTRA = "prixmin_extra";
+    public static final String ADDRESS_EXTRA = "address_extra";
+    public static final String NBRROOM_EXTRA = "nbrroom_extra";
+    public static final String LATITUDE_EXTRA = "latitude_extra";
+    public static final String LONGITUDE_EXTRA = "longitude_extra";
+    public static final String CHARACTERISTICS_EXTRA = "characteristics_extra";
+    public static final String DESCRIPTION_EXTRA = "description_extra";
     
     // Used to browse images
     public static final int SELECT_PICTURE = 1;

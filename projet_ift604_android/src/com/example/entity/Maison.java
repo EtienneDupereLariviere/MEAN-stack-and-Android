@@ -25,11 +25,17 @@ public class Maison implements Serializable {
 		super();
 	}
 	
-	public Maison(Categorie categorie, Integer price, String description, byte[] image){
+	public Maison(Categorie categorie, Integer price, String description, byte[] image, String caracteristic,
+			      double longitude, double latitude, Integer nbChambre, String address){
 		this.categorie = categorie;
 		this.price = price;
 		this.description = description;
 		this.image = image;
+		this.caracteristic = caracteristic;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.nbChambre = nbChambre;
+		this.address = address;
 	}
 	
 	public Double getLatitude() {

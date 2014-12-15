@@ -74,8 +74,8 @@ public class ListMaisonActivity extends BaseActivity implements OnItemClickListe
 	    {
 	        Maison maison = maisonsArray[position];
 	        
-	        Intent intent = new Intent(ListMaisonActivity.this, ArticleActivity.class);
-	        intent.putExtra(Constants.ARTICLE_EXTRA, new Gson().toJson(maison));
+	        Intent intent = new Intent(ListMaisonActivity.this, HouseActivity.class);
+	        intent.putExtra(Constants.HOUSE_EXTRA, new Gson().toJson(maison));
 	        startActivity(intent);	        
 	        ListMaisonActivity.this.finish();
 	    }
