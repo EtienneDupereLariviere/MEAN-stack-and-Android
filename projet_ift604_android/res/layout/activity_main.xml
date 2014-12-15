@@ -26,7 +26,7 @@
          android:id="@+id/textViewDesc"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:text="Attendez DOC! Lorsque ce petit bolide atteindra 88 miles à l'heure, préparez-vous à quelque chose qui décoiffe." />
+         android:text="Bienvenue dans l'application numéro 1 concernant l'immobilier!" />
      
      <Button
             android:id="@+id/btnLogOut"

@@ -5,10 +5,10 @@ import com.google.android.gms.maps.model.LatLng;
 public class Constants {
     
     // Use this on when working on emulator
-    //public static final String SERVER_URL = "http://10.0.2.2:3000";
+    public static final String SERVER_URL = "http://10.0.2.2:3000";
     
     // Use this one when working with phone (replace with your ipv4 address)
-    public static final String SERVER_URL = "http://192.168.43.110:3000";
+    //public static final String SERVER_URL = "http://192.168.43.110:3000";
     
     // Urls
     public static final String SIGN_IN_URL = "/auth/signin";
