@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.entity.Categorie;
 import com.example.entity.CategorieCollection;
@@ -72,31 +73,35 @@ public class SearchHouseActivity extends BaseActivity {
 	private OnClickListener btnRechercherListener = new OnClickListener() {
 		
 		public void onClick(View v) {
-		    
-		    Double minPrice = Double.parseDouble(TextPrixMinimum.getText().toString());
-		    Double maxPrice = Double.parseDouble(TextPrixMaximum.getText().toString());
-		    String category = SpinnerCat.getSelectedItem().toString();
-		    String city = TextVille.getText().toString().trim(); 
-		    
-		    if (category.equals("All categories")) {
-		        category = ""; 
-		    }
-		    		    
-		    Categorie categorie = CategorieCollection.findCategorie(category);
-		    
-		    String categorieId = "";
-		    
-		    if (categorie != null)
-		        categorieId = categorie.get_id();
-		    
-		    if (minPrice >= 0 && maxPrice > 0 && minPrice != maxPrice && minPrice < maxPrice) {
-       		    Intent intent = new Intent(SearchHouseActivity.this, ListMaisonActivity.class);
-                intent.putExtra(Constants.CATEGORY_EXTRA, categorieId);
-                intent.putExtra(Constants.CITY_EXTRA, city);
-                intent.putExtra(Constants.PRIXMAX_EXTRA, TextPrixMaximum.getText().toString());
-                intent.putExtra(Constants.PRIXMIN_EXTRA, TextPrixMinimum.getText().toString());
-    		    startActivity(intent);
-		    }
+		    if(!TextPrixMinimum.getText().toString().trim().equals("") && 
+		       !TextPrixMaximum.getText().toString().trim().equals("")){
+			    Double minPrice = Double.parseDouble(TextPrixMinimum.getText().toString());
+			    Double maxPrice = Double.parseDouble(TextPrixMaximum.getText().toString());
+			    String category = SpinnerCat.getSelectedItem().toString();
+			    String city = TextVille.getText().toString().trim(); 
+			    
+			    if (category.equals("All categories")) {
+			        category = ""; 
+			    }
+			    		    
+			    Categorie categorie = CategorieCollection.findCategorie(category);
+			    
+			    String categorieId = "";
+			    
+			    if (categorie != null)
+			        categorieId = categorie.get_id();
+			    
+			    if (minPrice >= 0 && maxPrice > 0 && minPrice != maxPrice && minPrice < maxPrice) {
+	       		    Intent intent = new Intent(SearchHouseActivity.this, ListMaisonActivity.class);
+	                intent.putExtra(Constants.CATEGORY_EXTRA, categorieId);
+	                intent.putExtra(Constants.CITY_EXTRA, city);
+	                intent.putExtra(Constants.PRIXMAX_EXTRA, TextPrixMaximum.getText().toString());
+	                intent.putExtra(Constants.PRIXMIN_EXTRA, TextPrixMinimum.getText().toString());
+	    		    startActivity(intent);
+			    }
+		    }  
+		    else
+		    	Toast.makeText(SearchHouseActivity.this, getResources().getString(R.string.noMinMax), Toast.LENGTH_SHORT).show();
 		}
 	};
 

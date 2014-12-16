@@ -83,20 +83,21 @@
 
         <!-- Use for Google Maps -->
 
-
-        <!--
+		<!--
         Use this command on windows:
-        keytool -list -v -alias androiddebugkey -keystore C:\Users\Flix2\.android\debug.keystore -storepass android -keypass android
+        keytool -list -v -alias androiddebugkey -keystore C:\Users\Alex\Documents\.android\debug.keystore -storepass android -keypass android
         
         And put the result in that format on Google Apis (add android key):
-        A7:5A:5B:00:4F:21:DB:14:35:48:89:B2:86:FE:36:01:6F:E1:1D:E7;com.example.projet_ift604_android
+        79:57:9C:19:90:52:67:5B:B4:4E:9A:33:97:1B:C4:FC:39:DC:F0:C3;com.example.projet_ift604_android
         
-        Use the generated key to put in android:value
+        Use the generated key to put in android:value
+
         -->
+        
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBMX0t77vta3FBm8lRVGpTFGBBF-_yLvOI" />
+            android:value="AIzaSyAd54bXWY9gO0PjzPHcsHuI7aKGKukBk4I" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

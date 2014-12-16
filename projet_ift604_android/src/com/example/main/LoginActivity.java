@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
         boolean reachable = false;
         
         try {
-            SocketAddress sockaddr = new InetSocketAddress("10.0.2.2", 3000);
+            SocketAddress sockaddr = new InetSocketAddress("192.168.43.134", 3000);
             socket.connect(sockaddr, 4000);
             reachable = true;
         } catch (UnknownHostException e) {

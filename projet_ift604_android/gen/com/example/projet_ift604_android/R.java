@@ -1920,6 +1920,7 @@ containing a value of this type.
         /**  No categorie selected 
          */
         public static final int noCatSelected=0x7f070036;
+        public static final int noMinMax=0x7f070038;
         /**  Article 
          */
         public static final int noTitleContent=0x7f070035;
@@ -1932,7 +1933,7 @@ containing a value of this type.
         public static final int notGoodUserPass=0x7f070034;
         /**  Server offline 
          */
-        public static final int serverOffline=0x7f070038;
+        public static final int serverOffline=0x7f070039;
         public static final int store_picture_message=0x7f070001;
         public static final int store_picture_title=0x7f070000;
         /**  Text on a placeholder buy button when Google Play services is not
